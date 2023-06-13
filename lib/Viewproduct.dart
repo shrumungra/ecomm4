@@ -63,7 +63,7 @@ class _ViewproductState extends State<Viewproduct> {
                           Flexible(
                               child: Row(
                             children: [
-                              Text("${product!.productdata![index].pRICE}/-"),
+                              Expanded(child: Text("${product!.productdata![index].pRICE}/-")),
                               PopupMenuButton<int>(
                                 offset: Offset(30,0),
                                 padding: EdgeInsets.only(left: 110),

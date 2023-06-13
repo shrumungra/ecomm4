@@ -143,6 +143,7 @@ class _AddproductState extends State<Addproduct> {
         ])),
         floatingActionButton: FloatingActionButton(
             onPressed: () async {
+
               List<int> imgbyte = File(imagepath).readAsBytesSync();
               String imagedata = base64Encode(imgbyte);
               print("======imagestring$imagedata");

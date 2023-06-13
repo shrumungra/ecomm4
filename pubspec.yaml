@@ -38,8 +38,8 @@ dependencies:
   http:
   image_picker:
   shared_preferences:
-
-
+  cached_network_image:
+  razorpay_flutter: 
 dev_dependencies:
   flutter_test:
     sdk: flutter

@@ -53,7 +53,6 @@ class _PaymentpageState extends State<Paymentpage> {
   void _handlePaymentError(PaymentFailureResponse response) {
 
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("${response.toString()}")));
-
     // Do something when payment fails
   }
 

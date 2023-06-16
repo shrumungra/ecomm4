@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:ecomm2/Addproduct.dart';
 import 'package:ecomm2/Cart.dart';
 import 'package:ecomm2/homepage.dart';
+import 'package:ecomm2/product.dart';
 import 'package:ecomm2/updateproduct.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -48,75 +49,81 @@ class _ViewproductState extends State<Viewproduct> {
           ? GridView.builder(
               itemCount: product!.productdata!.length,
               gridDelegate:
-                  SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+                  SliverGridDelegateWithFixedCrossAxisCount(childAspectRatio: .7,crossAxisCount: 2),
               itemBuilder: (context, index) {
-                return Card(
-                  margin: EdgeInsets.all(10),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(25)),
-                  elevation: 20,
-                  child: Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Flexible(
-                              child: Row(
-                            children: [
-                              Expanded(child: Text("${product!.productdata![index].pRICE}/-")),
-                              PopupMenuButton<int>(
-                                offset: Offset(30,0),
-                                padding: EdgeInsets.only(left: 110),
-                                color: Colors.black54,
-                                elevation: 20,
-                                itemBuilder: (context) {
-                                  return [
-                                    PopupMenuItem(
-                                      child: Text("update",
-                                          style:
-                                              TextStyle(color: Colors.white)),
-                                      value:1,
-                                    ),
-                                    PopupMenuItem(
-                                      child: Text("delete",
-                                          style:
-                                              TextStyle(color: Colors.white)),
-                                      value: 2,
-                                    )
-                                  ];
-                                },onSelected: (value) {
-                                  if(value==1){
-                                    print("object");
-                                    Navigator.push(context, MaterialPageRoute(builder: (context) {
-                                      return update(product!.productdata![index]);
-                                    },));
-                                  }
-                                },
-                              )
-                            ],
-                          )),
-                          SizedBox(
-                            height: 3,
-                          ),
-                          Flexible(
-                            child: Container(
-                              height: 70,
-                              width: 70,
-                              child: Image(
-                                  image: NetworkImage(
-                                      "https://mugra216.000webhostapp.com/register/${product!.productdata![index].tHAMBNAIL}")),
+                return InkWell(onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return sp(product!.productdata![index]);
+                  },));
+                },
+                  child: Card(
+                    margin: EdgeInsets.all(10),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(25)),
+                    elevation: 20,
+                    child: Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Flexible(flex: 1,
+                                child: Row( mainAxisSize: MainAxisSize.max,
+                              children: [
+                                Expanded(child: Text("${product!.productdata![index].pRICE}/-")),
+                                PopupMenuButton<int>(
+                                  offset: Offset(30,0),
+                                  padding: EdgeInsets.only(left: 80),
+                                  color: Colors.black54,
+                                  elevation: 20,
+                                  itemBuilder: (context) {
+                                    return [
+                                      PopupMenuItem(
+                                        child: Text("update",
+                                            style:
+                                                TextStyle(color: Colors.white)),
+                                        value:1,
+                                      ),
+                                      PopupMenuItem(
+                                        child: Text("delete",
+                                            style:
+                                                TextStyle(color: Colors.white)),
+                                        value: 2,
+                                      )
+                                    ];
+                                  },onSelected: (value) {
+                                    if(value==1){
+                                      print("object");
+                                      Navigator.push(context, MaterialPageRoute(builder: (context) {
+                                        return update(product!.productdata![index]);
+                                      },));
+                                    }
+                                  },
+                                )
+                              ],
+                            )),
+                            SizedBox(
+                              height: 3,
                             ),
-                          ),
-                          Flexible(
-                            child: ListTile(
-                              selectedTileColor: Colors.pink,
-                              title:
-                                  Text("${product!.productdata![index].tITLE}"),
-                              subtitle: Text(
-                                  "${product!.productdata![index].dESCRIPTION}"),
+                            Flexible(flex: 3,
+                              child: Container(
+                                height: 200,
+                                width: double.infinity,
+                                child: Image(fit: BoxFit.cover,
+                                    image: NetworkImage(
+                                        "https://mugra216.000webhostapp.com/register/${product!.productdata![index].tHAMBNAIL}")),
+                              ),
                             ),
-                          )
-                        ]),
+                            Flexible(flex: 2,
+                              child: ListTile(
+                                selectedTileColor: Colors.pink,
+                                title:
+                                    Text("${product!.productdata![index].tITLE}"),
+                                subtitle: Text(
+                                    "${product!.productdata![index].dESCRIPTION}"),
+                              ),
+                            )
+                          ]),
+                    ),
                   ),
                 );
               },

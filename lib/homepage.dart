@@ -46,7 +46,11 @@ class _homeState extends State<home> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-          appBar: AppBar(),
+          appBar: AppBar(actions: [IconButton(onPressed: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) {
+              return Cart();
+            },));
+          }, icon: Icon(Icons.shopping_cart))]),
           drawer: Drawer(
             child: ListView(padding: EdgeInsets.zero,
               children: [
@@ -84,7 +88,6 @@ class _homeState extends State<home> {
                       cnt=0;
                     });
                     Navigator.pop(context);
-
                   },
                   leading: Icon(Icons.logout_outlined),
                   title: Text(style: TextStyle(fontSize: 17), "View product"),
